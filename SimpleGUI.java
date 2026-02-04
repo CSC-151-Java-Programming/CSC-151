@@ -32,6 +32,11 @@ public class SimpleGUI {
         userText.setBounds(10, 80, 80, 25);
         panel.add(loginButton);
 
+        // Create a button
+        JButton loginButton = new JButton("Login");
+        loginButton.setBounds(10,80,165,25);
+        panel.add(loginButton);
+
         // Add action listener to button
         loginButton.addActionListener(new ActionListener() {
             @Override
