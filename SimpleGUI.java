@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 // Defines the main class; entry point of program
 
 public class SimpleGUI {
-    private static JButton loginButton; // Declare the button at the class level
 
     // public static void main(String[] args):
     // main method is the starting point of the application.
@@ -87,7 +86,7 @@ public class SimpleGUI {
             // userText.getText(): Retrieves the text entered by the user in the text field
             // JOptionPane.showMessageDialog: Displays a dialog box showing a greeting that
             // includes the user's name
-            
+
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
