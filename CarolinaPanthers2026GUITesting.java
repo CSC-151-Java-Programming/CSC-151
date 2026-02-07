@@ -11,6 +11,14 @@ public class CarolinaPanthers2026GUITesting extends JFrame {
     private JList<String> itemList;
     private DefaultListModel<String> listModel;
 
+    private String[] players = {
+        "Maxwell Harper", "Landon Rivers", "Troy Jefferson"
+    };
+
+    private String[] coaches = {
+        "Frank Reich", "Josh McCown", "Dan Morgan"
+    };
+
     public CarolinaPanthers2026GUITesting() {
         setTitle("NFL Carolina Panthers 2026 Season Info");
         setSize(400, 300);
@@ -35,18 +43,18 @@ public class CarolinaPanthers2026GUITesting extends JFrame {
         itemList.addListSelectionListener(new ItemSelectionListener());
 
         JScrollPane scrollPane = new JScrollPane(itemList);
-
-        itemPanel.add(scrollPane);
-        JButton backButton = new JButton("Back to Main");
-        itemPanel.add(backButton);
+        itemPanel.setLayout(new BorderLayout());
+        itemPanel.add(scrollPane, BorderLayout.CENTER);
+        JButton backButton = new JButton("Go Back");
+        itemPanel.add(backButton, BorderLayout.SOUTH);
 
         mainPanel.add(buttonPanel, "Buttons");
         mainPanel.add(itemPanel, "Items");
 
         add(mainPanel, BorderLayout.CENTER);
 
-        button1.addActionListener(new ButtonClickListener("Items 1"));
-        button2.addActionListener(new ButtonClickListener("Items 2"));
+        button1.addActionListener(new ButtonClickListener("Players"));
+        button2.addActionListener(new ButtonClickListener("Coaches/Staff"));
         backButton.addActionListener(e -> showButtons());
     }
 
@@ -65,17 +73,18 @@ public class CarolinaPanthers2026GUITesting extends JFrame {
 
         private void updateItemList() {
             listModel.clear();
-            String[] items;
-            if (itemCategory.equals("Item 1")) {
-                items = new String[]{"Item 1A", "Item 1B", "Item 1C"};
+            String[] items = null;
+            if (itemCategory.equals("Players")) {
+                items = players;
+            } else if (itemCategory.equals("Coaches/Staff")) {
+                items = coaches;
             }
-            else {
-                items = new String[]{"Item 2A", "Item 2B", "Item 2C"};
+
+            if (items != null) {
+                for (String item : items) {
+                    listModel.addElement(item);
+                }
             }
-            for (String item : items) {
-                listModel.addElement(item);
-            }
-            itemList.setModel(listModel);
         }
     }
 
@@ -92,32 +101,19 @@ public class CarolinaPanthers2026GUITesting extends JFrame {
     }
 
     private void showItemDetail(String selectedItem) {
-        String message;
+        String message = "Details about " + selectedItem;
+        String title = playersListContains(selectedItem) ? "Players Details" : "Coaches/Staff Details";
 
-        switch (selectedItem) {
-            case "Item 1A":
-                message = "Details about Item 1A";
-                break;
-            case "Item 1B": 
-                message = "Details about Item 1B";
-                break;
-            case "Item 1C":
-                message = "Details about Item 1C";
-                break;
-            case "Item 2A":
-                message = "Details about Item 2A";
-                break;
-            case "Item 2B": 
-                message = "Details about Item 2B";
-                break;
-            case "Item 2C":
-                message = "Details about Item 2C";
-                break;
-            default:
-                message = "No details available for " + selectedItem;
+        JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private boolean playersListContains(String selectedItem) {
+        for (String player : players) {
+            if (player.equals(selectedItem)) {
+                return true;
+            }
         }
-
-        JOptionPane.showMessageDialog(this, message, "Item Details", JOptionPane.INFORMATION_MESSAGE);
+        return false;
     }
 
     private void showItems() {
