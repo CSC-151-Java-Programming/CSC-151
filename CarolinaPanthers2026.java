@@ -8,10 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.Color; 
 
 public class CarolinaPanthers2026 extends JFrame {
     
-    // GUI componenets.
+    // GUI componenets. (Aly3673's work)
     private JPanel mainPanel, buttonPanel, itemPanel;
     private JButton button1, button2;
     private JList<String> itemList;
@@ -135,8 +136,15 @@ public class CarolinaPanthers2026 extends JFrame {
         buttonPanel = new JPanel();
         itemPanel = new JPanel();
 
+        buttonPanel.setBackground(Color.LIGHT_GRAY);
+        itemPanel.setBackground(Color.LIGHT_GRAY);
+        mainPanel.setBackground(Color.BLACK);
+
         button1 = new JButton("Players");
         button2 = new JButton("Coaches/Staff");
+
+        button1.setForeground(Color.BLUE);
+        button2.setForeground(Color.BLUE);
 
         buttonPanel.add(button1);
         buttonPanel.add(button2);
@@ -146,6 +154,11 @@ public class CarolinaPanthers2026 extends JFrame {
         itemList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         itemList.setVisibleRowCount(10);
 
+        itemList.setBackground(Color.WHITE);
+        itemList.setForeground(Color.BLUE);
+        itemList.setSelectionBackground(Color.BLUE);
+        itemList.setSelectionForeground(Color.WHITE);
+
         itemList.addListSelectionListener(new ItemSelectionListener());
 
         JScrollPane scrollPane = new JScrollPane(itemList);
@@ -154,6 +167,7 @@ public class CarolinaPanthers2026 extends JFrame {
         itemPanel.add(scrollPane, BorderLayout.CENTER);
 
         JButton backButton = new JButton("Go Back");
+        backButton.setForeground(Color.BLACK);
         itemPanel.add(backButton, BorderLayout.SOUTH);
 
         mainPanel.add(buttonPanel, "Buttons");
