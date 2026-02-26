@@ -1,6 +1,5 @@
 package src.main.java.GroupProject_02;
 
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -9,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public class GroupProject_02 {
     public static void main(String[] args) {
@@ -35,11 +35,15 @@ public class GroupProject_02 {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             String filePath = selectedFile.getAbsolutePath();
-            
-            if (filePath.endsWith(".csv")) {
-                readCsvFile(selectedFile);
-            } else if (filePath.endsWith(".xls") || filePath.endsWith(".xlsx")) {
-                readExcelFile(selectedFile);
+
+            try {
+                if (filePath.endsWith(".csv")) {
+                    readCsvFile(selectedFile);
+                } else if (filePath.endsWith(".xls") || filePath.endsWith(".xlsx")) {
+                    readExcelFile(selectedFile);
+                }
+            } catch (IOException | InvalidFormatException e) {
+                e.printStackTrace(); // Ensure proper import
             }
         }
     }
@@ -51,11 +55,11 @@ public class GroupProject_02 {
                 System.out.print((char) data);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Correct usage
         }
     }
 
-    private static void readExcelFile(File file) {
+    private static void readExcelFile(File file) throws IOException, InvalidFormatException {
         try (Workbook workbook = new XSSFWorkbook(file)) {
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
@@ -71,11 +75,8 @@ public class GroupProject_02 {
                             break;
                     }
                 }
-
                 System.out.println();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
