@@ -1,7 +1,8 @@
 // Members who contributed to the final project:
-// A. Young (Aly3673) - Created the GUI 
-// B. Wilson (wilsonb2742) - Provided all players and coaches/staff along with info on the whole team
-// C. Melvin (melvinp0609) - Added all players and team stats
+// A. Young (Aly3673) - Created the GUI
+// B. Wilson (wilsonb2742) - Provided all players and coaches/staff along with info
+// on the whole team
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
